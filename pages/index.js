@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch'
 import Layout from '../components/Layout';
-import {style} from "typestyle";
 import {Row} from 'reactstrap';
+import {style} from "typestyle";
 
 const className = style({background: 'red'});
 

@@ -1,0 +1,26 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "스웨거 문서 샘플",
+        "description": "디프만 스타트킷 api샘플 스웨거",
+        "version": "1.0",
+        "contact": {
+            "email": "kane7274@gmail.com"
+        }
+    },
+    "produces": ["application/json"],
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/test": {
+            "get": {
+            "summary": "샘플 api 테스트",
+            "tags": ["공통 API"],
+            "description": "/test로 보내면 나옵니다.",
+            "parameters": [],
+            "responses": {},
+            "produces": ["application/json"]
+            }
+        }
+    }
+}
