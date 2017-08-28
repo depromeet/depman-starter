@@ -9,7 +9,6 @@ import Header from './Header';
 import { Container } from 'reactstrap'
 
 class Layout extends Component {
-
   add = () => {
     this.props.addCount();
   }
@@ -29,7 +28,6 @@ class Layout extends Component {
     )
   }
 }
-
 
 const mapStateToProps = ({ count }) => ({ count });
 

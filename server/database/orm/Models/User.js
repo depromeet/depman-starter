@@ -1,14 +1,21 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../sequelize');
+const connection = require('../connection');
 
 
-const User = sequelize.define('user', {
+const User = connection.define('User', {
     firstName: {
         type: Sequelize.STRING
     },
     lastName: {
         type: Sequelize.STRING
-    }
+    }, 
+    DEL_FLAG: {
+        type: Sequelize.INTEGER(1),
+        defaultValue: 0,
+    },
+}, {
+    tableName: 'TB_USER_INFO'
 });
 
+connection.sync({force: true}).then(() => console.log('Databases sync'));
 module.exports = User;
