@@ -14,8 +14,12 @@ const User = connection.define('User', {
         defaultValue: 0,
     },
 }, {
-    tableName: 'TB_USER_INFO'
+    tableName: 'TB_USER_INFO',
+    defaultScope: {
+        where: {
+            DEL_FLAG: 0
+        }
+    }
 });
 
-connection.sync({force: true}).then(() => console.log('Databases sync'));
 module.exports = User;

@@ -1,4 +1,5 @@
 require('dotenv').load({ path: '.env' });
+global.reqlib    = require('app-root-path').require;
 
 const express = require('express');
 const next = require('next');
@@ -12,7 +13,9 @@ const handle = app.getRequestHandler()
 const swaggerUi = require('swagger-ui-express');
 const swaggerV1 = require('./api/v1/swagger.json');
 const port = parseInt(process.env.PORT, 10) || 3000;
-const User = require('./database/orm/Models/User');
+
+//===================routers========================
+const sampleRouter = require('./api/v1/sample');
 
 app.prepare()
 .then(() => {
@@ -20,14 +23,7 @@ app.prepare()
 
   server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerV1));
 
-  server.get('/test', (req, res, next) => {
-    return User.create({
-        firstName: 'Kim',
-        lastName: 'HyeonJun'
-    })
-    .then((user) => res.status(201).json(user))
-    .catch(err=> next(err));
-  });
+  server.use('/smp', sampleRouter);
 
   server.get('*', (req, res) => {
     return handle(req, res)
