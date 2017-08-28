@@ -1,4 +1,9 @@
 import React, {Component} from 'react';
+
+import { bindActionCreators } from 'redux'
+import { initStore, addCount, serverRenderClock } from '../redux/actions/index.actions'
+import withRedux from 'next-redux-wrapper'
+
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch'
 import Layout from '../components/Layout';
@@ -7,21 +12,20 @@ import {style} from "typestyle";
 
 const className = style({background: 'red'});
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+class Index extends Component {
+  static getInitialProps ({ store, isServer }) {
+    store.dispatch(serverRenderClock(isServer));
+    store.dispatch(addCount());
+    return { isServer }
+  }
 
-function getPosts () {
-  return [
-    { id: 'hello-nextjs', title: '안녕하세요'},
-    { id: 'learn-nextjs', title: '디프만 작은 프로젝트'},
-    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT'},
-  ]
-}
+  componentDidMount () {
+  }
 
-const PostLink = ({ post }) => (
-  <li>{post.title}</li>
-)
+  componentWillUnmount () {
+    clearInterval(this.timer);
+  }
 
-export default class Index extends Component {
   render(){
     return (
       <Layout>
@@ -32,11 +36,6 @@ export default class Index extends Component {
             {process.env.TEST}
             </div>
             <button className={'btn btn-primary'}>dd</button>
-            <ul>
-              {getPosts().map((post) => (
-                <PostLink key={post.id} post={post}/>
-              ))}
-            </ul>
           </div>
         </Row>
       </Layout>
@@ -44,3 +43,10 @@ export default class Index extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCount: bindActionCreators(addCount, dispatch)
+  }
+}
+
+export default withRedux(initStore, null, mapDispatchToProps)(Index);
