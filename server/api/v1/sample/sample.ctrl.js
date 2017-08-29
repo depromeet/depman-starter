@@ -1,9 +1,10 @@
 const User = reqlib('/server/database/orm/models/User');
+const keygen = require('keygen');
 
 exports.createUser = (req, res, next) => {
     User.create({
-        firstName: 'Kim',
-        lastName: 'HyeonJun'
+        USER_CD: keygen.hex(20),
+        NAME: 'Kim HyeonJun'
     })
     .then((user) => res.send(user))
     .catch(next);

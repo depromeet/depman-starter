@@ -6,7 +6,7 @@ import { addCount } from '../redux/actions/index.actions';
 import Head from 'next/head';
 import { cssRaw, style } from 'typestyle';
 import Header from './Header';
-import { Container } from 'reactstrap'
+import { Container, Row } from 'reactstrap'
 
 class Layout extends Component {
   add = () => {
@@ -18,11 +18,14 @@ class Layout extends Component {
     
     return (
       <div>
-        <button onClick={this.add}>Add To Count{count}</button>
-
         <Header />
         <Container>
           {this.props.children}
+          <Row>
+            <div className={'col-md-12'}>
+              <button onClick={this.add} className={'btn btn-warning'}>Add To Count{count}</button>
+            </div>
+          </Row>
         </Container>
       </div>
     )

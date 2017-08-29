@@ -10,8 +10,6 @@ import Layout from '../components/Layout';
 import {Row} from 'reactstrap';
 import {style} from "typestyle";
 
-const className = style({background: 'red'});
-
 class Index extends Component {
   static getInitialProps ({ store, isServer }) {
     store.dispatch(serverRenderClock(isServer));
@@ -30,12 +28,12 @@ class Index extends Component {
     return (
       <Layout>
         <Row>
-          <div className={'col-md-4'}>
-            <h1>My Blog</h1>
-            <div className={className}>
-            {process.env.TEST}
+          <div className={'col-md-12'}>
+            <h1>디프만 스타트킷</h1>
+            <div>
+              process.env.TEST : {process.env.TEST}
             </div>
-            <button className={'btn btn-primary'}>dd</button>
+            <button className={'btn btn-primary'}>그냥 테스트 버튼 아무것도 하는거 없어요</button>
           </div>
         </Row>
       </Layout>
